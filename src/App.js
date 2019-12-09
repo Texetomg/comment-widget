@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Content from './components/Content/Content'
-import CommentBlock from './components/CommentBlock/CommentBlock'
+import CommentsBlock from './components/CommentsBlock/CommentsBlock'
+import commentsMock from './mocks/comments.json'
 
-function App() {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>Comment-widget</p>
-      </header>
-      <main className='App-main'>
-        <Content/>
-        <CommentBlock/>
-      </main>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      person : 'Bogdan',
+      comment : {
+        date : '',
+        text : '',
+      },
+      comments : commentsMock
+    }
+  }
+
+  handleInputChange = event => {
+    this.setState({
+      [event.target.name.text]: event.target.value,
+      [event.target.name.date]: Date.now(),
+    })
+  }
+  render() {
+    return (
+      <div className='App'>
+        <header className='App-header'>
+          <p>Comment-widget</p>
+        </header>
+        <main className='App-main'>
+          <CommentsBlock
+            onChange={this.handleInputChange}
+            comments={this.state.comments}
+          />
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;

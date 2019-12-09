@@ -1,0 +1,9 @@
+.commentsList {
+    padding: 10px 40px 5px 40px;
+    margin: 0 auto;
+    border: 1px solid white;
+    width: 600px;
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}

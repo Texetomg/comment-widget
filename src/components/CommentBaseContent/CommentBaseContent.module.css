@@ -1,0 +1,9 @@
+.description {
+    font-size: 10px;
+}
+
+.bottomLine {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+}
