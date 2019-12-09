@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import CommentsBlock from './components/CommentsBlock/CommentsBlock'
 import commentsMock from './mocks/comments.json'
+import CommentForm from './components/CommentForm/CommentForm'
+import CommentsList from './components/CommentsList/CommentsList'
 
 class App extends Component {
   constructor(props){
@@ -9,7 +10,6 @@ class App extends Component {
     this.state = {
       person : 'Bogdan',
       comment : {
-        date : '',
         text : '',
       },
       comments : commentsMock
@@ -19,7 +19,6 @@ class App extends Component {
   handleInputChange = event => {
     this.setState({
       [event.target.name.text]: event.target.value,
-      [event.target.name.date]: Date.now(),
     })
   }
   render() {
@@ -29,10 +28,8 @@ class App extends Component {
           <p>Comment-widget</p>
         </header>
         <main className='App-main'>
-          <CommentsBlock
-            onChange={this.handleInputChange}
-            comments={this.state.comments}
-          />
+          <CommentsList comments={this.state.comments}/>
+          <CommentForm onChange={this.handleInputChange}/>
         </main>
       </div>
     );
