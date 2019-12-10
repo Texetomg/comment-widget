@@ -5,7 +5,7 @@ import styles from './CommentForm.module.css'
 
 export default (props) => {
     return (
-        <form className={styles.commentForm}>
+        <form onSubmit={props.onSubmit} className={styles.commentForm}>
             <CommentInput
                 name='comment'
                 onChange={props.onChange}

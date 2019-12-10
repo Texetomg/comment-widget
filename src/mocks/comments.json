@@ -8,16 +8,6 @@
           "person": "AndreySon",
           "text": "Privet kek",
           "date": "12.12.1995"
-        },
-        {
-          "person": "AndreySon",
-          "text": "Privet kek",
-          "date": "12.12.1995"
-        },
-        {
-          "person": "AndreySon",
-          "text": "Privet kek",
-          "date": "12.12.1995"
         }
       ]
     },
@@ -25,24 +15,6 @@
       "person": "Andrey",
       "text": "Privet kek",
       "date": "12.12.1995",
-      "childrens": []
-    },
-    {
-      "person": "Petr",
-      "text": "Privet lol",
-      "date": "12.12.1996",
-      "childrens": []
-    },
-    {
-      "person": "Kostya",
-      "text": "Privet lul",
-      "date": "12.12.1997",
-      "childrens": []
-    },
-    {
-      "person": "Zhenya",
-      "text": "Privet lel",
-      "date": "12.12.1998",
       "childrens": []
     }
   ]

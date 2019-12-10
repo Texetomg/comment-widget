@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './CommentBaseContent.module.css'
+import Button from '../Button/Button'
 
 export default (props) => {
     return (
@@ -10,7 +11,7 @@ export default (props) => {
             <div>{props.data.text}</div>
             <div className={styles.bottomLine}>
                 <div className={styles.description}>{props.data.date}</div>
-                <button type="submit">Ответить</button>
+                <Button type="submit">Ответить</Button>
             </div>
         </div>
     )

@@ -6,8 +6,12 @@ import CommentBaseContent from '../CommentBaseContent/CommentBaseContent'
 export default (props) => {
     return(
         <div className={styles.comment}>
-            <CommentBaseContent data={props.data}/>
-            <CommentChild data={props.data.childrens}/>
+            <CommentBaseContent
+                data={props.data}
+            />
+            <CommentChild
+                data={props.data.childrens}
+            />
         </div>
     )
 }

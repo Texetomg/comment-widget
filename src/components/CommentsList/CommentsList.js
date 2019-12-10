@@ -6,8 +6,11 @@ import { uuid } from 'uuidv4'
 export default (props) => {
     return (
         <div className={styles.commentsList}>
-            {props.comments.map(comment => 
-                <Comment key={uuid()} data={comment}/>
+            {props.comments.map((comment, i) => 
+                <Comment
+                    key={uuid()}
+                    data={comment}
+                />
             )}
         </div>
     )
