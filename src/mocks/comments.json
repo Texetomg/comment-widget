@@ -1,0 +1,30 @@
+[
+    {
+      "id": "1",
+      "edited": "false",
+      "reply": "false",
+      "person": "AndreyDad",
+      "text": "Privet kek",
+      "date": "12.12.1995",
+      "parentId": ""
+    },
+    {
+      "id": "2",
+      "edited": "false",
+      "reply": "false",
+      "person": "AndreySon",
+      "text": "Sam ty kek",
+      "date": "12.12.1995",
+      "parentId": "1"
+    },
+    {
+      "id": "3",
+      "edited": "true",
+      "reply": "false",
+      "person": "Andrey",
+      "text": "Privet kuk",
+      "date": "12.12.1995",
+      "childrens": [],
+      "parentId": ""
+    }  
+  ]
