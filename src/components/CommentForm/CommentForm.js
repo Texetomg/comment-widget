@@ -8,7 +8,7 @@ export default (props) => {
     return (
         <Form
             onSubmit={props.onSubmit}
-            render={({ handleSubmit, submitting, pristine, values }) => (
+            render={({ handleSubmit, submitting, pristine }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <Field

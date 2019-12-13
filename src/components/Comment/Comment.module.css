@@ -1,5 +1,8 @@
-.comment {
+.parent, .child {
     border-top: 1px solid white;
     text-align: left;
 }
 
+.child {
+    margin-left: 20px;
+}

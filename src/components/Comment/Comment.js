@@ -1,17 +1,25 @@
 import React from 'react'
 import styles from './Comment.module.css'
-import CommentChild from '../CommentChild/CommentChild'
 import CommentBaseContent from '../CommentBaseContent/CommentBaseContent'
 
 export default (props) => {
+    const { data, childs } = props;
     return(
-        <div className={styles.comment}>
+        <React.Fragment>
             <CommentBaseContent
-                data={props.data}
+                className={styles.parent}
+                data={data}
             />
-            <CommentChild
-                data={props.data.childrens}
-            />
-        </div>
+            {childs.length > 0 ?
+                childs.map(child => (
+                    <CommentBaseContent
+                        key={child.id}
+                        data={child}
+                        className={styles.child}
+                    />
+                 ))
+                : null
+            }
+        </React.Fragment>
     )
 }

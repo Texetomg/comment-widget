@@ -14,18 +14,20 @@ class App extends Component {
       comments : commentsMock
     }
   }
-
+ 
   handleSubmit = event => { 
-    const newAccount = {
+    const newComment = {
       id: uuid(),
       person: this.state.person,
+      edited: 'false',
+      reply: 'false',
       text: event.commentInput,
       date: moment().format('lll'),
-      childrens: []
+      parentId: null,
     }
 
     this.setState({
-      comments: [...this.state.comments, newAccount]
+      comments: [...this.state.comments, newComment]
     })
   }
 
