@@ -3,6 +3,8 @@ import './App.css';
 import commentsMock from './mocks/comments.json'
 import CommentForm from './components/CommentForm/CommentForm'
 import CommentsList from './components/CommentsList/CommentsList'
+import { uuid } from 'uuidv4'
+import  moment  from 'moment'
 
 class App extends Component {
   constructor(props){
@@ -22,17 +24,12 @@ class App extends Component {
     })
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    let d = Date.now();
-    d = new Date(d);
-    const chunks = [d.getDate(), d.getMonth() + 1, d.getFullYear()];
-	  d = chunks.map(chunk => String(chunk).padStart(2, '0')).join('.');
-
-    let newAccount = {
+  handleSubmit = event => { 
+    const newAccount = {
+      id: uuid(),
       person: this.state.person,
       text: this.state.text,
-      date: d,
+      date: moment().format('lll'),
       childrens: []
     }
     console.log([...this.state.comments, newAccount])
@@ -40,6 +37,7 @@ class App extends Component {
       comments: [...this.state.comments, newAccount]
     })
   }
+  
   render() {
     return (
       <div className='App'>

@@ -1,16 +1,31 @@
 import React from 'react'
-import Button from '../Button/Button'
-import CommentInput from '../CommentInput/CommentInput'
-import styles from './CommentForm.module.css'
+/* import Button from '../Button/Button'
+import CommentInput from '../CommentInput/CommentInput'*/
+import styles from './CommentForm.module.css' 
+import { Form, Field } from 'react-final-form'
 
 export default (props) => {
     return (
-        <form onSubmit={props.onSubmit} className={styles.commentForm}>
-            <CommentInput
-                name='comment'
-                onChange={props.onChange}
-            />
-            <Button type="submit">Отправить</Button>
-        </form>
+        <Form
+            onSubmit={props.onSubmit}
+            render={({ handleSubmit, submitting, pristine}) => (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <Field
+                            name="commentInput"
+                            component="input"
+                            type="text"
+                            placeholder="Enter your comment"
+                        />
+                        <button
+                            type="submit"
+                            disabled={submitting || pristine}
+                        >
+                            Enter
+                        </button>
+                    </div>
+                </form>
+            )}
+        />
     )
 }
