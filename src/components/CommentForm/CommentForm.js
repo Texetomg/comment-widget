@@ -1,14 +1,14 @@
 import React from 'react'
 /* import Button from '../Button/Button'
-import CommentInput from '../CommentInput/CommentInput'*/
-import styles from './CommentForm.module.css' 
+import CommentInput from '../CommentInput/CommentInput'
+import styles from './CommentForm.module.css' */
 import { Form, Field } from 'react-final-form'
 
 export default (props) => {
     return (
         <Form
             onSubmit={props.onSubmit}
-            render={({ handleSubmit, submitting, pristine}) => (
+            render={({ handleSubmit, submitting, pristine, values }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <Field

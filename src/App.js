@@ -10,34 +10,25 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      index: '',
       person : 'Bogdan',
-      text : '',
       comments : commentsMock
     }
-  }
-
-  handleInputChange = event => {
-    console.log('123');
-    this.setState({
-      text: event.target.value,
-    })
   }
 
   handleSubmit = event => { 
     const newAccount = {
       id: uuid(),
       person: this.state.person,
-      text: this.state.text,
+      text: event.commentInput,
       date: moment().format('lll'),
       childrens: []
     }
-    console.log([...this.state.comments, newAccount])
+
     this.setState({
       comments: [...this.state.comments, newAccount]
     })
   }
-  
+
   render() {
     return (
       <div className='App'>
@@ -50,7 +41,6 @@ class App extends Component {
           />
           <CommentForm
             onSubmit={this.handleSubmit}
-            onChange={this.handleInputChange}
           />
         </main>
       </div>
