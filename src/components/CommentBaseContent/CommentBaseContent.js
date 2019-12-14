@@ -1,10 +1,9 @@
 import React from 'react'
 import styles from './CommentBaseContent.module.css'
 import Button from '../Button/Button'
-import CommentForm from '../CommentForm/CommentForm'
 
 export default (props) => {
-    const { person, text, date, edited, reply } = props.data;
+    const { person, text, date, edited } = props.data;
 
     return (
         <div className={props.className}>
@@ -19,10 +18,9 @@ export default (props) => {
                 <div className={styles.description}>
                     {edited === 'true' ? 'edited' : null}
                 </div>
-                {
-                    reply === 'true' ? <CommentForm/> : null
-                }
-                <Button type='submit'>Ответить</Button>
+                <Button type='submit'>
+                    Ответить
+                </Button>
             </div>
         </div>
     )
