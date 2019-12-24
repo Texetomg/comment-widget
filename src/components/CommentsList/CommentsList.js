@@ -3,10 +3,16 @@ import styles from './CommentsList.module.css'
 import Comment from '../Comment/Comment'
 
 export default (props) => {
-		const { comments } = props;
-    const parents = comments.filter((comment) => (
-        comment.parentId === ""
-    ));
+	const {
+		comments,
+		setParentId,
+		delComment,
+		changeComment,
+	} = props;
+	
+	const parents = comments.filter((comment) => (
+			comment.parentId === ""
+	));
 
 	return (
 		<div className={styles.commentsList}>
@@ -17,6 +23,9 @@ export default (props) => {
 					
 				return (
 					<Comment
+						setParentId={setParentId}
+						changeComment={changeComment}
+						delComment={delComment}
 						key={parent.id}
 						data={parent}
 						childs={childs}

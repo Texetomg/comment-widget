@@ -9,6 +9,7 @@ export default (props) => {
       <form onSubmit={handleSubmit}>
         <div>
             <Field
+              autoFocus={true}
               name="commentInput"
               component="input"
               type="text"

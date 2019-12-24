@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './Button.module.css'
 export default (props) => {
-  const { type, onClick } = props
+  const { type, action } = props
 
   return (
     <button
-      onClick ={ onClick }
+      onClick={action}
       className={styles.button}
       type={type}
     >
