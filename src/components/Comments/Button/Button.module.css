@@ -1,0 +1,32 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+.wrapper img {
+    margin-right: 8px;
+}
+.attachButton,
+.addButton,
+.addButton_inactive {
+  cursor: pointer;
+  width: 154px;
+  height: 32px;
+  outline: none;
+  border: none;
+}
+.addButton {
+  color: white;
+  background-color: #36ac3a;
+}
+.addButton:hover {
+  background-color: #158914;
+}
+.addButton_inactive{
+    background-color: #E5E5E5;
+}
+.attachButton {
+  background-color: white;
+}
+.attachButton:hover {
+  text-decoration: underline;
+}

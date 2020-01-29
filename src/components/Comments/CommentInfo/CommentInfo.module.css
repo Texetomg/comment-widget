@@ -1,0 +1,22 @@
+.commentinfo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.commentinfo > * {
+  margin-right: 9px;
+  color: #757575;
+  font-weight: bold;
+}
+.time {
+  font-size: 13px;
+}
+.username {
+  font-size: 13px;
+}
+
+.avatar img {
+  max-width: 20px;
+  min-height: 20px;
+  border-radius: 25px;
+}
