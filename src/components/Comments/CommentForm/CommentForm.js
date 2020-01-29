@@ -22,8 +22,7 @@ class CommentForm extends React.Component {
 
   handleSubmit = e => {
     const { userAva, userName } = this.props.userInfo;
-    const id =
-      this.props.mode === "edit" ? this.props.comment.id : generateId();
+    const id = this.props.mode === "edit" ? this.props.comment.id : generateId();
     const parentId = this.props.mode === "answer" ? this.props.comment.id : "";
     const comment = {
       id: id,
@@ -42,6 +41,7 @@ class CommentForm extends React.Component {
       this.props.addComment(comment);
       this.setState({ comment: "" });
     }
+ 
     this.props.action();
   };
   render() {

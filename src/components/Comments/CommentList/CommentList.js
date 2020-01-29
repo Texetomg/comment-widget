@@ -15,7 +15,7 @@ class CommentList extends React.Component {
     );
 
   renderComments = comments => {
-    let arr = [];
+    const arr = [];
     let depth = -1;
 
     const myf = parentComments => {

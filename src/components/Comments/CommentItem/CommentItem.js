@@ -10,22 +10,20 @@ class CommentItem extends React.Component {
     super(props);
     this.state = {
       editing: false,
-      answering: false
+      answering: false,
+      rollUp: false,
     };
   }
 
-  onEdit = () => {
-    const editing = this.state.editing;
-    this.setState({ editing: !editing });
-  };
-
-  onAnswer = () => {
-    const answering = this.state.answering;
-    this.setState({ answering: !answering });
-  };
+  reverseProp = (key) => {
+    const obj = {};
+    const currentValue = this.state[key];
+    obj[key] = !currentValue;
+    this.setState(obj);
+  }
 
   render() {
-    const { editing, answering } = this.state;
+    const { editing, answering, rollUp } = this.state;
     const { comment, depth } = this.props;
     let dotArray = [];
 
@@ -42,18 +40,25 @@ class CommentItem extends React.Component {
           <CommentHeader
             depth={depth}
             comment={comment}
-            onEdit={this.onEdit}
-            onAnswer={this.onAnswer}
+            onEdit={() => this.reverseProp("editing")}
+            onAnswer={() => this.reverseProp("answering")}
+            onRollUp={() => this.reverseProp("rollUp")}
+            rollUp={this.state.rollUp}
           />
-          <div>{comment.text}</div>
+          {rollUp ? null : <div>{comment.text}</div> }
+          
           {editing ? (
-            <CommentForm comment={comment} mode={"edit"} action={this.onEdit} />
+            <CommentForm
+              comment={comment}
+              mode={"edit"}
+              action={() => this.reverseProp("editing")}
+            />
           ) : answering ? (
             <CommentForm
               parentId={this.props.parentId}
               comment={comment}
               mode={"answer"}
-              action={this.onAnswer}
+              action={() => this.reverseProp("answering")}
             />
           ) : null}
         </div>

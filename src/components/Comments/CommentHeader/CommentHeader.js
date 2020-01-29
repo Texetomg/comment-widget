@@ -5,9 +5,18 @@ import { connect } from "react-redux";
 import { delComment } from "../../../redux/actions";
 
 const CommentHeader = props => {
-  const { comments, comment, depth } = props;
+  const {
+    comments,
+    comment,
+    depth,
+    onAnswer,
+    onEdit,
+    onRollUp,
+    rollUp
+  } = props;
   const itemIndex = comments.indexOf(comment);
   const disabled = comment.userId === comments.userId;
+
   const deleteComment = index => {
     if (disabled) props.delComment(index);
   };
@@ -16,14 +25,19 @@ const CommentHeader = props => {
     <div className={styles.header}>
       <CommentInfo comment={comment} />
       <div className={styles.controlButtons}>
-        {depth !== 8 ? (
-          <button onClick={props.onAnswer} className={styles.controlButton}>
+        {depth !== 8 && !rollUp ? (
+          <button
+            onClick={onAnswer}
+            className={styles.controlButton}>
             Ответить
           </button>
          ) : null}
         {disabled ? (
           <React.Fragment>
-            <button onClick={props.onEdit} className={styles.controlButton}>
+            <button
+              onClick={onEdit}
+              className={styles.controlButton}
+            >
               Редактировать
             </button>
             <button
@@ -34,7 +48,9 @@ const CommentHeader = props => {
             </button>
           </React.Fragment>
         ) : null}
-        <button className={styles.controlButton}>Свернуть</button>
+        <button
+          className={styles.controlButton}
+        onClick={onRollUp}>{ rollUp ? "Развернуть" : "Свернуть"}</button>
       </div>
     </div>
   );
