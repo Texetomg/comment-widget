@@ -7,7 +7,7 @@
     "text": "После того как ВПО отображает WebView, оно отправляет SMS-сообщение в службу Сбербанка AutoPay (79262000900) со словом «баланс». Получив ответ, ВПО парсит SMS сообщение, чтобы определить баланс счета. Если он меньше 3000 руб, троянец ничего не сделает. Если он превышает 68 тыс руб, троянец запрашивает 66 тыс, в противном случае он запросит доступную сумму минус 1000.",
     "parentId": "",
     "userId": 1,
-    "editing": false
+    "deleted": false
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "text": "Ого, привет!",
     "parentId": "",
     "userId": 1,
-    "editing": false
+    "deleted": false
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "text": "Ееее, звезда смерти!",
     "parentId": 1,
     "userId": 1,
-    "editing": false
+    "deleted": false
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@
     "text": "Дааа, я хорош!",
     "parentId":3,
     "userId": 1,
-    "editing": false
+    "deleted": false
   },
   {
     "id": 5,
@@ -47,7 +47,7 @@
     "text": "Несомненно!",
     "parentId":4,
     "userId": 1,
-    "editing": false
+    "deleted": false
   },
   {
     "id": 6,
@@ -57,6 +57,6 @@
     "text": "Несомненно!!!!",
     "parentId":5,
     "userId": 1,
-    "editing": false
+    "deleted": false
   }
 ]

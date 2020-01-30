@@ -19,44 +19,48 @@ const CommentHeader = props => {
 
   const deleteComment = comment => {
     comment.text = "";
-    comment.userName = "Комментарий был удален";
+    comment.userName = "";
     comment.userAva = "";
     comment.date = currentTime();
+    comment.deleted = true;
     if (disabled) props.delComment(comment);
   };
 
   return (
-    <div className={styles.header}>
-      <CommentInfo comment={comment} />
-      <div className={styles.controlButtons}>
-        {depth !== 8 && !rollUp ? (
+    
+      <div className={styles.header}>
+        <CommentInfo comment={comment} />
+        {comment.deleted !== true ? (
+        <div className={styles.controlButtons}>
+          {depth !== 8 && !rollUp ? (
+            <button
+              onClick={onAnswer}
+              className={styles.controlButton}>
+              Ответить
+            </button>
+          ) : null}
+          {disabled ? (
+            <React.Fragment>
+              <button
+                onClick={onEdit}
+                className={styles.controlButton}
+              >
+                Редактировать
+              </button>
+              <button
+                onClick={() => deleteComment(comment)}
+                className={styles.controlButton}
+              >
+                Удалить
+              </button>
+            </React.Fragment>
+          ) : null}
           <button
-            onClick={onAnswer}
-            className={styles.controlButton}>
-            Ответить
-          </button>
-         ) : null}
-        {disabled ? (
-          <React.Fragment>
-            <button
-              onClick={onEdit}
-              className={styles.controlButton}
-            >
-              Редактировать
-            </button>
-            <button
-              onClick={() => deleteComment(comment)}
-              className={styles.controlButton}
-            >
-              Удалить
-            </button>
-          </React.Fragment>
-        ) : null}
-        <button
-          className={styles.controlButton}
-        onClick={onRollUp}>{ rollUp ? "Развернуть" : "Свернуть"}</button>
+            className={styles.controlButton}
+          onClick={onRollUp}>{ rollUp ? "Развернуть" : "Свернуть"}</button>
+        </div>
+        ): null}
       </div>
-    </div>
   );
 };
 const mapStateToProps = ({ comments }) => ({ comments });
