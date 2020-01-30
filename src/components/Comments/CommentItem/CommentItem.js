@@ -11,7 +11,6 @@ class CommentItem extends React.Component {
     this.state = {
       editing: false,
       answering: false,
-      rollUp: false,
     };
   }
 
@@ -23,8 +22,8 @@ class CommentItem extends React.Component {
   }
 
   render() {
-    const { editing, answering, rollUp} = this.state;
-    const { comment, depth, setRollUp } = this.props;
+    const { editing, answering,/*  rollUp */} = this.state;
+    const { comment, depth, setRollUp, rollUp } = this.props;
     let dotArray = [];
     for(let i = 0; i < depth; i++){
       dotArray.push(

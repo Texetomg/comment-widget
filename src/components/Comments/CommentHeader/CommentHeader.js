@@ -48,7 +48,11 @@ const CommentHeader = props => {
                 Редактировать
               </button>
               <button
-                onClick={() => deleteComment(comment)}
+                onClick={() => {
+                  if(window.confirm("Удалить комментарий?")){
+                    deleteComment(comment)
+                  }
+                }}
                 className={styles.controlButton}
               >
                 Удалить

@@ -70,16 +70,20 @@ class CommentList extends React.Component {
     const recursiveFilling = parents => {
       depth += 1;
       parents.forEach(parentComment => {
-        components.push(
-          <CommentItem
-            depth={depth}
-            key={parentComment.id}
-            comment={parentComment}
-            setRollUp={this.setRollUp}
-          />
-        );
+        
         for(let i = 0; i < this.state.components.length; i++){
           const childComments = this.findChilds(parentComment);
+          if(parentComment.id === this.state.components[i].commentId){
+            components.push(
+              <CommentItem
+                depth={depth}
+                key={parentComment.id}
+                comment={parentComment}
+                setRollUp={this.setRollUp}
+                rollUp={this.state.components[i].rollUp}
+              />
+            );
+          }
           if (parentComment.id === this.state.components[i].commentId
             && !this.state.components[i].rollUp
             && childComments.length > 0){ 
@@ -97,7 +101,6 @@ class CommentList extends React.Component {
     const parentComments = this.props.comments.filter(
       comment => comment.parentId === ""
     );
- 
     return this.renderComments(parentComments);
   }
 }
