@@ -1,24 +1,24 @@
-import React from "react";
-import CommentList from "./CommentList";
-import CommentForm from "./CommentForm";
+import React from 'react'
+import CommentList from './CommentList'
+import CommentForm from './CommentForm'
 import Button from './Button'
 import plusImg from '../../imgs/plus.svg'
 
 class Comments extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
     this.state = {
       submit: false
-    };
+    }
   }
 
   onSubmit = () => {
-    const submit = this.state.submit;
-    this.setState({ submit: !submit });
-    console.log(this.state);
+    const submit = this.state.submit
+    this.setState({ submit: !submit })
+    console.log(this.state)
   };
 
-  render() {
+  render () {
     return (
       <div>
         <CommentList />
@@ -35,8 +35,8 @@ class Comments extends React.Component {
           />
         )}
       </div>
-    );
+    )
   }
 }
 
-export default Comments;
+export default Comments

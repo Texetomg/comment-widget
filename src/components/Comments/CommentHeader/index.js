@@ -1,2 +1,2 @@
-import CommentHeader from "./CommentHeader";
-export default CommentHeader;
+import CommentHeader from './CommentHeader'
+export default CommentHeader

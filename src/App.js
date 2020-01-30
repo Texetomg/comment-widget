@@ -1,5 +1,5 @@
-import React from "react";
-import Comments from "./components/Comments";
+import React from 'react'
+import Comments from './components/Comments'
 
 /* import styles from "./App.module.css"; */
 
@@ -8,7 +8,7 @@ const App = () => {
     <div className="App">
       <Comments />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

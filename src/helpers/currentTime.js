@@ -1,5 +1,5 @@
 export const currentTime = () => {
-  const moment = require("moment");
+  const moment = require('moment')
 
-  return moment().format("DD.MM.Y HH:mm");
+  return moment().format('DD.MM.Y HH:mm')
 };

@@ -1,2 +1,2 @@
-import CommentItem from "./CommentItem";
-export default CommentItem;
+import CommentItem from './CommentItem'
+export default CommentItem

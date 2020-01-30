@@ -1,39 +1,40 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchComments } from "../../../redux/actions";
-//import styles from "./CommentList.module.css";
-import CommentItem from "../CommentItem";
+/* eslint-disable react/prop-types */
+import React from 'react'
+import { connect } from 'react-redux'
+import { fetchComments } from '../../../redux/actions'
+// import styles from "./CommentList.module.css";
+import CommentItem from '../CommentItem'
 
 class CommentList extends React.Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       components: [
         {
-          commentId: "",
+          commentId: '',
           rollUp: false
         }
       ]
     }
   }
 
-  componentDidMount() {
-    this.props.fetchComments();
-    const stateArray = [];
+  componentDidMount () {
+    this.props.fetchComments()
+    const stateArray = []
     this.props.comments.map(comment => stateArray.push({
       commentId: comment.id,
       rollUp: false
     }))
-    this.setState({components: stateArray})
+    this.setState({ components: stateArray })
   }
 
-  componentDidUpdate(prevProps){
-    const prevComments = prevProps.comments;
+  componentDidUpdate (prevProps) {
+    const prevComments = prevProps.comments
     const currComments = this.props.comments
     const newComment = (
-      prevComments.filter(i=>currComments.indexOf(i)<0)
-      .concat(currComments.filter(i=>prevComments.indexOf(i)<0))
-    );
+      prevComments.filter(i => currComments.indexOf(i) < 0)
+        .concat(currComments.filter(i => prevComments.indexOf(i) < 0))
+    )
 
     if (newComment.length !== 0) {
       this.setState({
@@ -45,16 +46,16 @@ class CommentList extends React.Component {
     }
   }
 
-  setRollUp = (id) => {
-    const newState = [];
-    
+  setRollUp = id => {
+    const newState = []
+
     this.state.components.forEach(comment => {
       comment.commentId === id ? newState.push({
         commentId: comment.commentId,
         rollUp: !comment.rollUp
       }) : newState.push(comment)
     })
-    this.setState({components: newState})
+    this.setState({ components: newState })
   }
 
   findChilds = parentComment => (
@@ -64,16 +65,15 @@ class CommentList extends React.Component {
   );
 
   renderComments = comments => {
-    const components = [];
-    let depth = -1;
+    const components = []
+    let depth = -1
 
     const recursiveFilling = parents => {
-      depth += 1;
+      depth += 1
       parents.forEach(parentComment => {
-        
-        for(let i = 0; i < this.state.components.length; i++){
-          const childComments = this.findChilds(parentComment);
-          if(parentComment.id === this.state.components[i].commentId){
+        for (let i = 0; i < this.state.components.length; i++) {
+          const childComments = this.findChilds(parentComment)
+          if (parentComment.id === this.state.components[i].commentId) {
             components.push(
               <CommentItem
                 depth={depth}
@@ -82,32 +82,32 @@ class CommentList extends React.Component {
                 setRollUp={this.setRollUp}
                 rollUp={this.state.components[i].rollUp}
               />
-            );
+            )
           }
-          if (parentComment.id === this.state.components[i].commentId
-            && !this.state.components[i].rollUp
-            && childComments.length > 0){ 
-              recursiveFilling(childComments);
-              depth -= 1;
-          } 
+          if (parentComment.id === this.state.components[i].commentId &&
+            !this.state.components[i].rollUp &&
+            childComments.length > 0) {
+            recursiveFilling(childComments)
+            depth -= 1
+          }
         }
-      });
-      return components;
+      })
+      return components
     }
     return recursiveFilling(comments)
   };
 
-  render() {
+  render () {
     const parentComments = this.props.comments.filter(
-      comment => comment.parentId === ""
-    );
-    return this.renderComments(parentComments);
+      comment => comment.parentId === ''
+    )
+    return this.renderComments(parentComments)
   }
 }
 
-const mapStateToProps = ({ comments }) => ({ comments });
+const mapStateToProps = ({ comments }) => ({ comments })
 
 export default connect(
   mapStateToProps,
   { fetchComments }
-)(CommentList);
+)(CommentList)

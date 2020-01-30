@@ -1,10 +1,11 @@
-import React from "react";
-import styles from "./CommentInfo.module.css";
-import logo from "../../../imgs/defaultAva.png"
+/* eslint-disable react/prop-types */
+import React from 'react'
+import styles from './CommentInfo.module.css'
+import logo from '../../../imgs/defaultAva.png'
 
 const UserData = ({ comment }) => {
-  const { userAva, userName, commentDate, deleted } = comment;
-  const deletedMessage = "Комментарий был удален"
+  const { userAva, userName, commentDate, deleted } = comment
+  const deletedMessage = 'Комментарий был удален'
   return (
     <div className={styles.commentinfo}>
       <div className={styles.avatar}>
@@ -15,7 +16,7 @@ const UserData = ({ comment }) => {
       </div>
       <div className={styles.time}>{commentDate}</div>
     </div>
-  );
-};
+  )
+}
 
-export default UserData;
+export default UserData

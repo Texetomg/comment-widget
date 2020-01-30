@@ -1,24 +1,24 @@
-import data from "../../mocks/comments.json";
+import data from '../../mocks/comments.json'
 
-const initialState = [...data];
+const initialState = [...data]
 
 const comments = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_COMMENTS":
-      return action.payload;
-    case "ADD_COMMENT":
-      return [...state, action.payload];
-    case "DEL_COMMENT":
+    case 'FETCH_COMMENTS':
+      return action.payload
+    case 'ADD_COMMENT':
+      return [...state, action.payload]
+    case 'DEL_COMMENT':
       return state.map(comment => (
         comment.id === action.payload.id ? action.payload : comment
-      ));
-    case "EDIT_COMMENT":
+      ))
+    case 'EDIT_COMMENT':
       return state.map(comment => (
         comment.id === action.payload.id ? action.payload : comment
-      ));
+      ))
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default comments;
+export default comments

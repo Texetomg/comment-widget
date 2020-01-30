@@ -1,2 +1,2 @@
-import CommentList from "./CommentList";
-export default CommentList;
+import CommentList from './CommentList'
+export default CommentList

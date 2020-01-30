@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import comments from "./comments";
-import userInfo from "./userInfo";
+import { combineReducers } from 'redux'
+import comments from './comments'
+import userInfo from './userInfo'
 
-export default combineReducers({ comments, userInfo });
+export default combineReducers({ comments, userInfo })
