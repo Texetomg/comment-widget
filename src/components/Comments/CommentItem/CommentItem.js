@@ -23,10 +23,9 @@ class CommentItem extends React.Component {
   }
 
   render() {
-    const { editing, answering, rollUp } = this.state;
-    const { comment, depth } = this.props;
+    const { editing, answering, rollUp} = this.state;
+    const { comment, depth, setRollUp } = this.props;
     let dotArray = [];
- 
     for(let i = 0; i < depth; i++){
       dotArray.push(
         <Dot
@@ -48,7 +47,8 @@ class CommentItem extends React.Component {
             onEdit={() => this.reverseProp("editing")}
             onAnswer={() => this.reverseProp("answering")}
             onRollUp={() => this.reverseProp("rollUp")}
-            rollUp={this.state.rollUp}
+            rollUp={rollUp}
+            setRollUp={setRollUp}
           />
           {rollUp ? null : <div>{comment.text}</div> }
           

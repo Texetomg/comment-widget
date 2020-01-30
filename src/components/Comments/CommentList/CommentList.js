@@ -5,8 +5,56 @@ import { fetchComments } from "../../../redux/actions";
 import CommentItem from "../CommentItem";
 
 class CommentList extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      components: [
+        {
+          commentId: "",
+          rollUp: false
+        }
+      ]
+    }
+  }
+
   componentDidMount() {
     this.props.fetchComments();
+    const stateArray = [];
+    this.props.comments.map(comment => stateArray.push({
+      commentId: comment.id,
+      rollUp: false
+    }))
+    this.setState({components: stateArray})
+  }
+
+  componentDidUpdate(prevProps){
+    const prevComments = prevProps.comments;
+    const currComments = this.props.comments
+    const newComment = (
+      prevComments.filter(i=>currComments.indexOf(i)<0)
+      .concat(currComments.filter(i=>prevComments.indexOf(i)<0))
+    );
+
+    if (newComment.length !== 0) {
+      this.setState({
+        components: [...this.state.components, ...[{
+          commentId: newComment[0].id,
+          rollUp: false
+        }]]
+      })
+    }
+  }
+
+  setRollUp = (id) => {
+    const newState = [];
+    
+    this.state.components.forEach(comment => {
+      comment.commentId === id ? newState.push({
+        commentId: comment.commentId,
+        rollUp: !comment.rollUp
+      }) : newState.push(comment)
+    })
+    this.setState({components: newState})
   }
 
   findChilds = parentComment => (
@@ -22,17 +70,23 @@ class CommentList extends React.Component {
     const recursiveFilling = parents => {
       depth += 1;
       parents.forEach(parentComment => {
-        const childComments = this.findChilds(parentComment); 
         components.push(
           <CommentItem
             depth={depth}
             key={parentComment.id}
             comment={parentComment}
-          />);
-        if(childComments.length > 0){ 
-          recursiveFilling(childComments);
-          depth -= 1;
-        }       
+            setRollUp={this.setRollUp}
+          />
+        );
+        for(let i = 0; i < this.state.components.length; i++){
+          const childComments = this.findChilds(parentComment);
+          if (parentComment.id === this.state.components[i].commentId
+            && !this.state.components[i].rollUp
+            && childComments.length > 0){ 
+              recursiveFilling(childComments);
+              depth -= 1;
+          } 
+        }
       });
       return components;
     }

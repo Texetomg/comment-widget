@@ -13,7 +13,8 @@ const CommentHeader = props => {
     onAnswer,
     onEdit,
     onRollUp,
-    rollUp
+    rollUp,
+    setRollUp
   } = props;
   const disabled = comment.userId === comments.userId;
 
@@ -27,7 +28,6 @@ const CommentHeader = props => {
   };
 
   return (
-    
       <div className={styles.header}>
         <CommentInfo comment={comment} />
         {comment.deleted !== true ? (
@@ -57,7 +57,13 @@ const CommentHeader = props => {
           ) : null}
           <button
             className={styles.controlButton}
-          onClick={onRollUp}>{ rollUp ? "Развернуть" : "Свернуть"}</button>
+            onClick={() => {
+              onRollUp();
+              setRollUp(comment.id)
+            }}
+          >
+            { rollUp ? "Развернуть" : "Свернуть"}
+          </button>
         </div>
         ): null}
       </div>

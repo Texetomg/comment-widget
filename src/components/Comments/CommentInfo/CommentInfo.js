@@ -10,7 +10,9 @@ const UserData = ({ comment }) => {
       <div className={styles.avatar}>
         <img src={userAva.length === 0 ? logo : userAva} alt="avatara" />
       </div>
-      <div className={styles.username}>{deleted ? deletedMessage : userName}</div>
+      <div className={styles.username}>
+        {deleted ? deletedMessage : userName}
+      </div>
       <div className={styles.time}>{commentDate}</div>
     </div>
   );
