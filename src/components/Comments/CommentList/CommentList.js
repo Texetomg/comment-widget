@@ -9,34 +9,41 @@ class CommentList extends React.Component {
     this.props.fetchComments();
   }
 
-  findChilds = parentComment =>
+  findChilds = parentComment => (
     this.props.comments.filter(childComment =>
       parentComment.id === childComment.parentId
-    );
+    )
+  );
 
   renderComments = comments => {
-    const arr = [];
+    const components = [];
     let depth = -1;
 
-    const myf = parentComments => {
-      depth +=1;
-      parentComments.forEach(parentComment => { 
+    const recursiveFilling = parents => {
+      depth += 1;
+      parents.forEach(parentComment => {
         const childComments = this.findChilds(parentComment); 
-        arr.push(<CommentItem depth={depth} key={parentComment.id} comment={parentComment} />)
+        components.push(
+          <CommentItem
+            depth={depth}
+            key={parentComment.id}
+            comment={parentComment}
+          />);
         if(childComments.length > 0){ 
-          myf(childComments);
-          depth -=1;
-        } 
+          recursiveFilling(childComments);
+          depth -= 1;
+        }       
       });
-      return arr;
+      return components;
     }
-    return myf(comments)
+    return recursiveFilling(comments)
   };
 
   render() {
     const parentComments = this.props.comments.filter(
       comment => comment.parentId === ""
     );
+    console.log(this.renderComments(parentComments))
     return this.renderComments(parentComments);
   }
 }

@@ -4,6 +4,7 @@
 .commentItem {
   border: 1px solid transparent;
   padding: 5px;
+  min-width: 350px;
   width: 100%;
 }
 .commentItem:hover .header .controlButtons {

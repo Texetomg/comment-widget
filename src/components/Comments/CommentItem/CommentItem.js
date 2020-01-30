@@ -26,9 +26,14 @@ class CommentItem extends React.Component {
     const { editing, answering, rollUp } = this.state;
     const { comment, depth } = this.props;
     let dotArray = [];
-
+ 
     for(let i = 0; i < depth; i++){
-      dotArray.push(<Dot style={{marginRight: 12, marginTop: 13}}/>)
+      dotArray.push(
+        <Dot
+          key={`${i}${depth}`}
+          style={{marginRight: 12, marginTop: 13}}
+        />
+      )
     }
     
     return (
