@@ -3,6 +3,7 @@ import styles from "../CommentItem/CommentItem.module.css";
 import CommentInfo from "../CommentInfo";
 import { connect } from "react-redux";
 import { delComment } from "../../../redux/actions";
+import { currentTime } from "../../../helpers/currentTime";
 
 const CommentHeader = props => {
   const {
@@ -14,11 +15,14 @@ const CommentHeader = props => {
     onRollUp,
     rollUp
   } = props;
-  const itemIndex = comments.indexOf(comment);
   const disabled = comment.userId === comments.userId;
 
-  const deleteComment = index => {
-    if (disabled) props.delComment(index);
+  const deleteComment = comment => {
+    comment.text = "";
+    comment.userName = "Комментарий был удален";
+    comment.userAva = "";
+    comment.date = currentTime();
+    if (disabled) props.delComment(comment);
   };
 
   return (
@@ -41,7 +45,7 @@ const CommentHeader = props => {
               Редактировать
             </button>
             <button
-              onClick={() => deleteComment(itemIndex)}
+              onClick={() => deleteComment(comment)}
               className={styles.controlButton}
             >
               Удалить

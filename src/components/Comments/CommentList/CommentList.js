@@ -43,7 +43,7 @@ class CommentList extends React.Component {
     const parentComments = this.props.comments.filter(
       comment => comment.parentId === ""
     );
-    console.log(this.renderComments(parentComments))
+ 
     return this.renderComments(parentComments);
   }
 }

@@ -9,14 +9,13 @@ const comments = (state = initialState, action) => {
     case "ADD_COMMENT":
       return [...state, action.payload];
     case "DEL_COMMENT":
-      return [
-        ...state.slice(0, action.payload),
-        ...state.slice(action.payload + 1)
-      ];
+      return state.map(comment => (
+        comment.id === action.payload.id ? action.payload : comment
+      ));
     case "EDIT_COMMENT":
-      return state.map(comment => {
-        return comment.id === action.payload.id ? action.payload : comment;
-      });
+      return state.map(comment => (
+        comment.id === action.payload.id ? action.payload : comment
+      ));
     default:
       return state;
   }
