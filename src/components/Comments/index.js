@@ -15,7 +15,6 @@ class Comments extends React.Component {
   onSubmit = () => {
     const submit = this.state.submit
     this.setState({ submit: !submit })
-    console.log(this.state)
   };
 
   render () {

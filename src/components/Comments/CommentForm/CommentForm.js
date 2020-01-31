@@ -23,9 +23,8 @@ class CommentForm extends React.Component {
 
   handleSubmit = e => {
     const { userAva, userName } = this.props.userInfo
-    const id =
-      this.props.mode === 'edit' ? this.props.comment.id : generateId()
-    const parentId = this.props.mode === 'answer' ? this.props.comment.id : ''
+    const id = this.props.mode === 'edit' ? this.props.comment.id : generateId()
+    const parentId = this.props.mode === 'answer' ? this.props.comment.id : this.props.comment.parentId
     const comment = {
       id: id,
       userAva: userAva,

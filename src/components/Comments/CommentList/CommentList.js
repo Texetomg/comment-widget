@@ -1,107 +1,74 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchComments } from '../../../redux/actions'
-// import styles from "./CommentList.module.css";
+import * as d3 from 'd3'
 import CommentItem from '../CommentItem'
+// import styles from "./CommentList.module.css";
+
+const RenderRow = ({ comments }) => {
+  const array = []
+
+  const recursive = (comments, depth = 0) => {
+    comments.forEach(comment => {
+      array.push(
+        <CommentItem
+          depth={comment.parent.id === '0' ? 0 : depth}
+          key={comment.id}
+          comment={comment.data}
+        />
+      )
+      if (comment.children) {
+        depth += 1
+        recursive(comment.children, depth)
+      }
+      depth -= 1
+    })
+  }
+  if (comments.length > 0) {
+    recursive(comments)
+  }
+  return (array)
+}
 
 class CommentList extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
-      components: [
-        {
-          commentId: '',
-          rollUp: false
-        }
-      ]
+      comments: []
     }
+  }
+
+  updateState = () => {
+    const stratify = d3.stratify()
+      .id(d => d.id)
+      .parentId(d => d.parentId)
+
+    const structuredComments = stratify(this.props.comments)
+
+    this.setState({ comments: [...structuredComments.children] })
   }
 
   componentDidMount () {
     this.props.fetchComments()
-    const stateArray = []
-    this.props.comments.map(comment => stateArray.push({
-      commentId: comment.id,
-      rollUp: false
-    }))
-    this.setState({ components: stateArray })
+    this.updateState()
   }
 
   componentDidUpdate (prevProps) {
     const prevComments = prevProps.comments
     const currComments = this.props.comments
-    const newComment = (
+    const newComments = (
       prevComments.filter(i => currComments.indexOf(i) < 0)
         .concat(currComments.filter(i => prevComments.indexOf(i) < 0))
     )
 
-    if (newComment.length !== 0) {
-      this.setState({
-        components: [...this.state.components, ...[{
-          commentId: newComment[0].id,
-          rollUp: false
-        }]]
-      })
+    if (newComments[0]) {
+      this.updateState()
     }
   }
-
-  setRollUp = id => {
-    const newState = []
-
-    this.state.components.forEach(comment => {
-      comment.commentId === id ? newState.push({
-        commentId: comment.commentId,
-        rollUp: !comment.rollUp
-      }) : newState.push(comment)
-    })
-    this.setState({ components: newState })
-  }
-
-  findChilds = parentComment => (
-    this.props.comments.filter(childComment =>
-      parentComment.id === childComment.parentId
-    )
-  );
-
-  renderComments = comments => {
-    const components = []
-    let depth = -1
-
-    const recursiveFilling = parents => {
-      depth += 1
-      parents.forEach(parentComment => {
-        for (let i = 0; i < this.state.components.length; i++) {
-          const childComments = this.findChilds(parentComment)
-          if (parentComment.id === this.state.components[i].commentId) {
-            components.push(
-              <CommentItem
-                depth={depth}
-                key={parentComment.id}
-                comment={parentComment}
-                setRollUp={this.setRollUp}
-                rollUp={this.state.components[i].rollUp}
-              />
-            )
-          }
-          if (parentComment.id === this.state.components[i].commentId &&
-            !this.state.components[i].rollUp &&
-            childComments.length > 0) {
-            recursiveFilling(childComments)
-            depth -= 1
-          }
-        }
-      })
-      return components
-    }
-    return recursiveFilling(comments)
-  };
 
   render () {
-    const parentComments = this.props.comments.filter(
-      comment => comment.parentId === ''
-    )
-    return this.renderComments(parentComments)
+    return (<RenderRow comments={this.state.comments}/>)
   }
 }
 
