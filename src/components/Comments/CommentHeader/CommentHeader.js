@@ -26,7 +26,7 @@ const CommentHeader = (props) => {
     comment.deleted = true
     props.delComment(comment)
   }
-  console.log(isOpen)
+
   return (
     <div className={styles.header}>
       <CommentInfo comment={comment} />
