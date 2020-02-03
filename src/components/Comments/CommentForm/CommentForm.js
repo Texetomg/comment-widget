@@ -10,7 +10,6 @@ import attachImg from '../../../imgs/attach.svg'
 import Button from '../Button'
 
 const CommentForm = (props) => {
-  console.log(props)
   const [text, setText] = useState(props.mode === 'edit' ? props.comment.text : '')
   const handleChange = ({ target }) => {
     setText(target.value)

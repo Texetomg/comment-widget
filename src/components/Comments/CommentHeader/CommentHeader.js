@@ -9,10 +9,10 @@ import { currentTime } from '../../../helpers/currentTime'
 const CommentHeader = (props) => {
   const {
     comment,
-    onAnswer,
-    onEdit,
-    isOpen,
+    setAnswer,
+    setEdit,
     setOpen,
+    isOpen,
     userInfo
   } = props
 
@@ -26,19 +26,19 @@ const CommentHeader = (props) => {
     comment.deleted = true
     props.delComment(comment)
   }
-
+  console.log(isOpen)
   return (
     <div className={styles.header}>
       <CommentInfo comment={comment} />
       <div className={styles.controlButtons}>
         {comment.depth !== 8 && isOpen ? (
-          <button onClick={onAnswer} className={styles.controlButton}>
+          <button onClick={setAnswer} className={styles.controlButton}>
             Ответить
           </button>
         ) : null}
         {comment.userId === userInfo.userId ? (
           <React.Fragment>
-            <button onClick={onEdit} className={styles.controlButton}>
+            <button onClick={setEdit} className={styles.controlButton}>
               Редактировать
             </button>
             <button
@@ -57,7 +57,7 @@ const CommentHeader = (props) => {
           className={styles.controlButton}
           onClick={setOpen}
         >
-          {!isOpen ? 'Свернуть' : 'Развернуть'}
+          {isOpen ? 'Свернуть' : 'Развернуть'}
         </button>
       </div>
     </div>

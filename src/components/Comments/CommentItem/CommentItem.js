@@ -31,9 +31,9 @@ const CommentItem = (props) => {
           <CommentHeader
             depth={depth}
             comment={data}
-            onEdit={() => setEdit(!isEdit)}
-            onAnswer={() => setAnswer(!isAnswer)}
-            onOpen={isOpen}
+            setEdit={() => setEdit(!isEdit)}
+            setAnswer={() => setAnswer(!isAnswer)}
+            isOpen={isOpen}
             setOpen={() => setOpen(!isOpen)}
           />
           {isOpen ? <div>{data.text}</div> : null }
