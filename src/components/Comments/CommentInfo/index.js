@@ -1,2 +1,2 @@
-import CommentInfo from "./CommentInfo";
-export default CommentInfo;
+import CommentInfo from './CommentInfo'
+export default CommentInfo

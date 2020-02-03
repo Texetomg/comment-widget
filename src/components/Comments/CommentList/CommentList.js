@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { fetchComments } from '../../../redux/actions'
 import * as d3 from 'd3'
@@ -9,20 +9,18 @@ import CommentItem from '../CommentItem'
 const RenderRow = ({ comments }) => {
   const array = []
 
-  const recursive = (comments, depth = 0) => {
+  const recursive = (comments) => {
     comments.forEach(comment => {
       array.push(
         <CommentItem
-          depth={comment.parent.id === '0' ? 0 : depth}
+          depth={comment.depth - 1}
           key={comment.id}
           comment={comment.data}
         />
       )
       if (comment.children) {
-        depth += 1
-        recursive(comment.children, depth)
+        recursive(comment.children)
       }
-      depth -= 1
     })
   }
   if (comments.length > 0) {
@@ -45,7 +43,6 @@ class CommentList extends React.Component {
       .parentId(d => d.parentId)
 
     const structuredComments = stratify(this.props.comments)
-
     this.setState({ comments: [...structuredComments.children] })
   }
 
@@ -61,8 +58,9 @@ class CommentList extends React.Component {
       prevComments.filter(i => currComments.indexOf(i) < 0)
         .concat(currComments.filter(i => prevComments.indexOf(i) < 0))
     )
-
+    console.log(newComments)
     if (newComments[0]) {
+      console.log(newComments)
       this.updateState()
     }
   }
