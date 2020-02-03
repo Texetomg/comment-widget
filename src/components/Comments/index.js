@@ -11,7 +11,10 @@ const Comments = () => {
     <div>
       <CommentList />
       {submit ? (
-        <CommentForm mode='add' action={() => setSubmit(!submit)} />
+        <CommentForm
+          mode='add'
+          action={() => setSubmit(!submit)}
+        />
       ) : (
         <Button
           type="button"

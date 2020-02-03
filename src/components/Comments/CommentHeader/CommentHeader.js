@@ -8,66 +8,60 @@ import { currentTime } from '../../../helpers/currentTime'
 
 const CommentHeader = (props) => {
   const {
-    comments,
     comment,
-    depth,
     onAnswer,
     onEdit,
-    onRollUp,
-    rollUp,
-    setRollUp
+    isOpen,
+    setOpen,
+    userInfo
   } = props
-  const disabled = comment.userId === comments.userId
 
-  const deleteComment = (comment) => {
+  const deleteComment = (oldComment) => {
+    const comment = Object.assign({}, oldComment)
+
     comment.text = ''
     comment.userName = ''
     comment.userAva = ''
     comment.date = currentTime()
     comment.deleted = true
-    if (disabled) props.delComment(comment)
+    props.delComment(comment)
   }
 
   return (
     <div className={styles.header}>
       <CommentInfo comment={comment} />
-      {comment.deleted !== true ? (
-        <div className={styles.controlButtons}>
-          {depth !== 8 && !rollUp ? (
-            <button onClick={onAnswer} className={styles.controlButton}>
-              Ответить
-            </button>
-          ) : null}
-          {disabled ? (
-            <React.Fragment>
-              <button onClick={onEdit} className={styles.controlButton}>
-                Редактировать
-              </button>
-              <button
-                onClick={() => {
-                  if (window.confirm('Удалить комментарий?')) {
-                    deleteComment(comment)
-                  }
-                }}
-                className={styles.controlButton}
-              >
-                Удалить
-              </button>
-            </React.Fragment>
-          ) : null}
-          <button
-            className={styles.controlButton}
-            onClick={() => {
-              onRollUp()
-              setRollUp(comment.id)
-            }}
-          >
-            {rollUp ? 'Развернуть' : 'Свернуть'}
+      <div className={styles.controlButtons}>
+        {comment.depth !== 8 && isOpen ? (
+          <button onClick={onAnswer} className={styles.controlButton}>
+            Ответить
           </button>
-        </div>
-      ) : null}
+        ) : null}
+        {comment.userId === userInfo.userId ? (
+          <React.Fragment>
+            <button onClick={onEdit} className={styles.controlButton}>
+              Редактировать
+            </button>
+            <button
+              onClick={() => {
+                if (window.confirm('Удалить комментарий?')) {
+                  deleteComment(comment)
+                }
+              }}
+              className={styles.controlButton}
+            >
+              Удалить
+            </button>
+          </React.Fragment>
+        ) : null}
+        <button
+          className={styles.controlButton}
+          onClick={setOpen}
+        >
+          {!isOpen ? 'Свернуть' : 'Развернуть'}
+        </button>
+      </div>
     </div>
   )
 }
-const mapStateToProps = ({ comments }) => ({ comments })
+const mapStateToProps = ({ userInfo }) => ({ userInfo })
 export default connect(mapStateToProps, { delComment })(CommentHeader)

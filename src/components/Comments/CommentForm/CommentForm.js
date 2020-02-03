@@ -10,17 +10,19 @@ import attachImg from '../../../imgs/attach.svg'
 import Button from '../Button'
 
 const CommentForm = (props) => {
+  console.log(props)
   const [text, setText] = useState(props.mode === 'edit' ? props.comment.text : '')
-
   const handleChange = ({ target }) => {
     setText(target.value)
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    const { userInfo, mode, comment, editComment, addComment, action } = props
+    const { mode, comment, action, userInfo, editComment, addComment } = props
     const id = mode === 'edit' ? comment.id : generateId()
-    const parentId = mode === 'answer' ? comment.id : mode === 'add' ? '0' : comment.parentId
+    const parentId = mode === 'answer' ? comment.id
+      : mode === 'add' ? '0'
+        : comment.parentId
 
     const newComment = {
       id: id,
@@ -28,7 +30,8 @@ const CommentForm = (props) => {
       userName: userInfo.userName,
       commentDate: currentTime(),
       text: text,
-      parentId: parentId
+      parentId: parentId,
+      userId: userInfo.userId
     }
 
     if (mode === 'edit') {

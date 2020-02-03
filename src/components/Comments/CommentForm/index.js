@@ -1,2 +1,2 @@
-import CommentForm from "./CommentForm";
-export default CommentForm;
+import CommentForm from './CommentForm'
+export default CommentForm

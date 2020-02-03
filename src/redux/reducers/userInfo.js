@@ -7,6 +7,6 @@ const initialState = {
 
 const userInfo = (state = initialState, action) => {
   return state
-};
+}
 
 export default userInfo
